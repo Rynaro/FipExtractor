@@ -39,9 +39,9 @@ The API routes are:
 |reference_table|none|
 |brand|reference_table_id, vehicle_type|
 |model|reference_table_id, vehicle_type, brand_id|
-|model_through_year|reference_table_id, vehicle_type, brand_id, model_id|
-|model_year|reference_table_id, vehicle_type, brand_id, model_id, year, model_year, fuel_type_id|
-|full|reference_table_id, vehicle_type, brand_id, model_id, year, model_year, fuel_type_id, vehicle_type|
+|model_year|reference_table_id, vehicle_type, brand_id, model_id|
+|model_through_year|reference_table_id, vehicle_type, brand_id, model_id, year, model_year|
+|full|reference_table_id, vehicle_type, brand_id, model_id, year, model_year, fuel_type_id|
 
 ---
 #### Building a request
