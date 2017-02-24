@@ -1,4 +1,6 @@
-## FipExtractor
+## FipExtractor 
+
+[![Build Status](https://travis-ci.org/Rynaro/FipExtractor.svg?branch=master)](https://travis-ci.org/Rynaro/FipExtractor)
 
 FipExtractor is a easy-to-use translator of the FIPE API.
 
