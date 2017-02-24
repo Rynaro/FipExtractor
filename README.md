@@ -1,5 +1,5 @@
 ## FipExtractor
----
+
 FipExtractor is a easy-to-use translator of the FIPE API.
 
 Actually FIPE only release the information about their vehicle market search on
@@ -8,6 +8,13 @@ with your user common behaviour (clicking in selects, and buttons).
 
 FipExtractor is here for you! We consumes the FIPE API directly, and
 translates the some parameters that have non-sense labels. Making this gem more useful for you.
+
+### Install FipExtractor
+---
+FipExtractor is a gem builted.
+
+``gem install fipextractor``  or ``gem 'fipextractor', '~> 0.0.1'``
+
 
 ### Using FipExtractor
 ---
