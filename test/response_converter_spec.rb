@@ -31,5 +31,4 @@ describe FipeApi::ResponseConverter do
       query_date: "quarta-feira, 22 de fevereiro de 2017 22:35" })
   end
 
-
 end
