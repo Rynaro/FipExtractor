@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Rynaro/FipExtractor.svg?branch=master)](https://travis-ci.org/Rynaro/FipExtractor)
 [![Gem Version](https://badge.fury.io/rb/fipextractor.svg)](https://badge.fury.io/rb/fipextractor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 FipExtractor is a easy-to-use translator of the FIPE API.
 
