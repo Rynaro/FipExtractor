@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/Rynaro/fipextractor'
   s.license     = 'MIT'
 
-  s.add_dependency('unirest', '~> 1.1')
+  s.add_dependency('faraday', '~> 0.15')
 
   s.add_development_dependency('minitest', '~> 5.10')
   s.add_development_dependency('rake')
