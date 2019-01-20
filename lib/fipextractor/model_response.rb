@@ -3,8 +3,12 @@ require_relative 'response'
 module FipExtractor
   class ModelResponse < Response
 
-    def list
+    def models
       body[:Modelos]
+    end
+
+    def years
+      body[:Anos]
     end
 
   end

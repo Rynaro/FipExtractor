@@ -1,8 +1,8 @@
-require_relative 'request'
-require_relative 'model_response'
+require_relative 'resource'
+require_relative 'model_year_response'
 
 module FipExtractor
-  class ModelYear < Request
+  class ModelYear < Resource
     attr_reader :vehicle_type, :reference_table_id, :brand_id, :model_id
 
     def initialize(vehicle_type:, reference_table_id:, brand_id:, model_id:)
@@ -13,14 +13,15 @@ module FipExtractor
     end
 
     def route
-      'ConsultarModelos'
+      'ConsultarAnoModelo'
     end
 
     def params
       {
-        codigoTipoVeiculo: vehicle_type,
+        codigoTipoVeiculo: vehicle_type_id,
         codigoTabelaReferencia: reference_table_id,
-        codigoMarca: brand_id
+        codigoMarca: brand_id,
+        codigoModelo: model_id
       }
     end
   end

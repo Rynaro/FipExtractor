@@ -25,7 +25,7 @@ module FipExtractor
     end
 
     def base_url
-      "http://#{HOST}/#{API}"
+      "https://#{HOST}/#{API}"
     end
 
     def route
@@ -45,7 +45,7 @@ module FipExtractor
     def headers
       {
         'Host' => HOST,
-        'Referer' => "http://#{HOST}"
+        'Referer' => "https://#{HOST}"
       }
     end
   end

@@ -1,8 +1,8 @@
-require_relative 'request'
+require_relative 'resource'
 require_relative 'model_response'
 
 module FipExtractor
-  class Model < Request
+  class Model < Resource
     attr_reader :vehicle_type, :reference_table_id, :brand_id
 
     def initialize(vehicle_type:, reference_table_id:, brand_id:)
@@ -17,7 +17,7 @@ module FipExtractor
 
     def params
       {
-        codigoTipoVeiculo: vehicle_type,
+        codigoTipoVeiculo: vehicle_type_id,
         codigoTabelaReferencia: reference_table_id,
         codigoMarca: brand_id
       }
