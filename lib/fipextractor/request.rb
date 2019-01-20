@@ -3,6 +3,7 @@ require_relative 'response'
 
 module FipExtractor
   class RouteNotFoundError < StandardError; end
+  class ResourceNotFoundError < StandardError; end
 
   class Request
     HOST = "veiculos.fipe.org.br".freeze
@@ -10,7 +11,7 @@ module FipExtractor
 
     def call
       response_class.new(request).tap do |response|
-        raise("Operation Error #{response.body}") if response.error?
+        raise ResourceNotFoundError if response.error?
       end
     end
 
