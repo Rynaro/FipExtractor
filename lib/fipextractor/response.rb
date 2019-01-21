@@ -2,11 +2,11 @@ require 'json'
 
 module FipExtractor
   class Response
-    attr_reader :status, :body
+    attr_reader :status, :all
 
     def initialize(raw)
       @status = raw.status
-      @body = JSON.parse(raw.body, symbolize_names: true)
+      @all = JSON.parse(raw.body, symbolize_names: true)
     end
 
     def error?

@@ -3,13 +3,12 @@ require_relative 'model_through_year_response'
 
 module FipExtractor
   class ModelThroughYear < Resource
-    attr_reader :vehicle_type, :reference_table_id, :brand_id, :model_id, :year, :fuel
+    attr_reader :vehicle_type, :reference_table_id, :brand_id, :year, :fuel
 
-    def initialize(vehicle_type:, reference_table_id:, brand_id:, model_id:, year:, fuel: nil)
+    def initialize(vehicle_type:, reference_table_id:, brand_id:, year:, fuel: nil)
       @vehicle_type = vehicle_type
       @reference_table_id = reference_table_id
       @brand_id = brand_id
-      @model_id = model_id
       @year = year
       @fuel = fuel
     end
