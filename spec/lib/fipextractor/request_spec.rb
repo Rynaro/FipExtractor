@@ -74,5 +74,4 @@ RSpec.describe FipExtractor::Request do
       expect(subject.response_class).to eq(FipExtractor::RequestResponse)
     end
   end
-
 end
