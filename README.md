@@ -1,131 +1,88 @@
-## FipExtractor 
+# FipExtractor
 
-[![Build Status](https://travis-ci.org/Rynaro/FipExtractor.svg?branch=master)](https://travis-ci.org/Rynaro/FipExtractor)
-[![Gem Version](https://badge.fury.io/rb/fipextractor.svg)](https://badge.fury.io/rb/fipextractor)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Coverage Status](https://coveralls.io/repos/github/Rynaro/FipExtractor/badge.svg?branch=master)](https://coveralls.io/github/Rynaro/FipExtractor?branch=master)
+Unofficial client gem for FIPE vehicle table.
 
+## Installation
 
-FipExtractor is a easy-to-use translator of the FIPE API.
+Add this line in your Gemfile:
 
-Actually FIPE only release the information about their vehicle market search on
-your website. To get information generally you need to do many DOM manipulations,
-with your user common behaviour (clicking in selects, and buttons).
+```ruby
+gem 'fipextractor', '~> 1.0'
+```
 
-FipExtractor is here for you! We consumes the FIPE API directly, and
-translates the some parameters that have non-sense labels. Making this gem more useful for you.
+    $ bundle
 
-### Install FipExtractor
----
-FipExtractor is a gem builted.
+Or
 
-``gem install fipextractor``  or ``gem 'fipextractor', '~> 0.0.1'``
+    $ gem install fipextractor
 
+## Implemented Calls
 
-### Using FipExtractor
----
+- [ReferenceTable](#referencetable)
+- [Brand](#brand)
+- [Model](#Model)
+- [ModelYear](#modelyear)
+- [ModelThroughYear](#modelthroughyear)
+- [Vehicle](#vehicle)
 
-FipExtractor only provides a easy way to consume FIPE informations, we don't create any
-conversions to generate SQL, or another way to insert data into databases.
-You can do this with the FipExtractor application result data.
+### ReferenceTable
 
-We use the FIPE API, and with this information, we clearly need to work under their
-API rules. FipExtractor provides a validator that shows to you if your request parameters
-are malformed.
+```ruby
+response = FipExtractor::ReferenceTable.new.call
+response.all # array of reference tables id
+```
 
-FipExtractor creates a huge and simple abstraction around API requests.
+### Brand
 
-The API routes are:
+```ruby
+response = FipExtractor::Brand.new(vehicle_type: :car, reference_table_id: 66).call
+response.all # array of vehicle brands
+```
 
-|Route|Parameters|
-|------|----------|
-|reference_table|none|
-|brand|reference_table_id, vehicle_type|
-|model|reference_table_id, vehicle_type, brand_id|
-|model_year|reference_table_id, vehicle_type, brand_id, model_id|
-|model_through_year|reference_table_id, vehicle_type, brand_id, model_id, year, model_year|
-|full|reference_table_id, vehicle_type, brand_id, model_id, year, model_year, fuel_type_id|
+### Model
 
----
-#### Building a request
+```ruby
+response = FipExtractor::Model.new(vehicle_type: :car, reference_table_id: 66, brand_id: 44).call
+response.all # array of model and years
+response.models # array of model hashes
+response.years # array of year designated
+```
 
-````ruby
-extractor = FipExtractor.new(:full, {reference_table_id: 189, vehicle_type: :car, brand_id: 3, model_id: 7, model_year: "1999", year: "1999", fuel_type_id: 1})
-````
+### ModelYear
 
-You only need to create your FipExtractor object, and fill the parameters ``method`` and ``parameters``
+```ruby
+response = FipExtractor::ModelYear.new(vehicle_type: :car, reference_table_id: 66, brand_id: 44, model_id: 1878).call
+response.all # array of models with aging
+```
 
-The ``method`` only accepts the Symbol reference.
+### ModelThroughYear
 
-The ``parameters`` only accepts a Hash. (optional on ``:reference_table`` method)
+```ruby
+response = FipExtractor::ModelThroughYear.new(vehicle_type: :car, reference_table_id: 66, brand_id: 44, year: 1999, fuel: 1).call
+response.all # array of models ordered by year, and/or fuel filter
+```
 
----
-#### Checking the request parameters
+### Vehicle
 
-FipExtractor allows to submit a request directly, or check your parameters. You can choose, if you will validate your parameters, or not.
+```ruby
+response = FipExtractor::Vehicle.new(vehicle_type: :car, reference_table_id: 237, brand_id: 59, model_id: 2365, year: 1999, fuel: 3).call
+response.details # detailed fipe information of vehicle
+```
 
-Example of validation:
+#### Vehicle Types
 
-````ruby
-extractor = FipExtractor.new(:brand, {reference_table_id: 189, vehicle_type: :truck})
-validator = extractor.validate_parameters
-if validator.is_ok?
-  api = extractor.request
-  api = api.send
-  puts api.response
-else
-  puts validator.message
-end
-````
+```ruby
+  { car: 1, motorcycle: 2, truck: 3 }
+```
 
-The validation layer is a object like everything in Ruby. Calling ``validate_parameters``, you automatic validate your parameters and generate a object with the ``is_ok?`` and ``message`` methods.
+### Tests
 
-``is_ok?`` Returns a ``boolean``, if all parameters are OK, you get a ``true`` value here, otherwise a ``false`` value appears.
+`rake spec`
 
-``message`` Returns an array of String with the parameters problems with the request method, if have one.
+### Console
 
----
-#### Getting the data
+`bundle console`
 
-FipExtractor provides a friendly response data layout. All original API parameters are converted to a FipExtractor pattern. This pattern is more developer-like.
+## License
 
-The original API response layout provides some JSON keys like ``Label`` and ``Value``. This patterns isn't a good pattern. FipExtractor converts these kind of parameters, in a specific Hash based on request method.
-
-Getting data response:
-````ruby
-extractor = FipExtractor.new(:model, {reference_table_id: 189, vehicle_type: :truck, brand_id: 102})
-api = extractor.request
-api = api.send
-puts api.response
-````
-
-Output:
-
-````ruby
-{:brand_name=>"AGRALE", :brand_id=>"102"}
-{:brand_name=>"CHEVROLET", :brand_id=>"103"}
-{:brand_name=>"CICCOBUS", :brand_id=>"121"}
-{:brand_name=>"DAF", :brand_id=>"197"}
-{:brand_name=>"EFFA-JMC", :brand_id=>"179"}
-{:brand_name=>"FIAT", :brand_id=>"104"}
-{:brand_name=>"FORD", :brand_id=>"105"}
-{:brand_name=>"FOTON", :brand_id=>"191"}
-{:brand_name=>"GMC", :brand_id=>"106"}
-{:brand_name=>"HYUNDAI", :brand_id=>"181"}
-{:brand_name=>"IVECO", :brand_id=>"122"}
-{:brand_name=>"MAN", :brand_id=>"184"}
-{:brand_name=>"MARCOPOLO", :brand_id=>"108"}
-{:brand_name=>"MASCARELLO", :brand_id=>"196"}
-{:brand_name=>"MAXIBUS", :brand_id=>"194"}
-{:brand_name=>"MERCEDES-BENZ", :brand_id=>"109"}
-{:brand_name=>"NAVISTAR", :brand_id=>"110"}
-{:brand_name=>"NEOBUS", :brand_id=>"111"}
-{:brand_name=>"PUMA-ALFA", :brand_id=>"112"}
-{:brand_name=>"SAAB-SCANIA", :brand_id=>"113"}
-{:brand_name=>"SCANIA", :brand_id=>"114"}
-{:brand_name=>"SHACMAN", :brand_id=>"193"}
-{:brand_name=>"SINOTRUK", :brand_id=>"166"}
-{:brand_name=>"VOLKSWAGEN", :brand_id=>"115"}
-{:brand_name=>"VOLVO", :brand_id=>"116"}
-{:brand_name=>"WALKBUS", :brand_id=>"144"}
-````
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
