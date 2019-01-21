@@ -4,7 +4,7 @@ Unofficial client gem for FIPE vehicle table.
 
 ## Installation
 
-Adicione a linha no seu Gemfile
+Add this line in your Gemfile:
 
 ```ruby
 gem 'fipextractor', '~> 1.0'
@@ -75,7 +75,7 @@ response.details # detailed fipe information of vehicle
   { car: 1, motorcycle: 2, truck: 3 }
 ```
 
-### Testes
+### Tests
 
 `rake spec`
 
