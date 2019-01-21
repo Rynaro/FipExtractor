@@ -1,5 +1,10 @@
 # FipExtractor
 
+[![Gem Version](https://badge.fury.io/rb/fipextractor.svg)](https://badge.fury.io/rb/fipextractor)
+[![Build Status](https://travis-ci.org/Rynaro/FipExtractor.svg?branch=master)](https://travis-ci.org/Rynaro/FipExtractor)
+[![Coverage Status](https://coveralls.io/repos/github/Rynaro/FipExtractor/badge.svg?branch=master)](https://coveralls.io/github/Rynaro/FipExtractor?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e99b5562ae060486d7d9/maintainability)](https://codeclimate.com/github/Rynaro/FipExtractor/maintainability)
+
 Unofficial client gem for FIPE vehicle table.
 
 ## Installation
