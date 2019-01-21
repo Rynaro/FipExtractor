@@ -4,7 +4,6 @@ RSpec.describe FipExtractor::ModelThroughYear do
     {
       reference_table_id: 1,
       brand_id: 1,
-      model_id: 1,
       year: 1999,
       vehicle_type: :car
     }
@@ -33,7 +32,6 @@ RSpec.describe FipExtractor::ModelThroughYear do
           {
             reference_table_id: 1,
             brand_id: 1,
-            model_id: 1,
             year: 1999,
             fuel: 1,
             vehicle_type: :car
